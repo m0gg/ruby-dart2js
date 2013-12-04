@@ -2,7 +2,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "dart-js"
+  s.name        = "ruby-dart"
   s.version     = "0.0.1"
   s.authors     = ["Timo Uhlmann"]
   s.email       = ["TODO: Your email"]
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.summary     = "TODO: Summary of RubyDart."
   s.description = "TODO: Description of RubyDart."
 
-  s.files = Dir["{lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{lib}/**/*"] + ["MIT-LICENSE", "Rakefile"] #, "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   # s.add_dependency "rails", "~> 3.2.6"
