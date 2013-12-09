@@ -8,15 +8,23 @@ class TestDartJs < Test::Unit::TestCase
   end
 
   def test_compile
-    Tempfile.open(['test', '.dart']) do |f|
+    Tempfile.open(%w(test .dart)) do |f|
       f.write <<-EOS
         main() {
           print('Hello, Dart!');
         }
       EOS
       f.flush
-      DartJs.compile f.path
-      assert File.exists?("#{f.path}.js")
+      of_path = File.join(Dir.tmpdir, 'dart_js_testrun.dart.js')
+      dfile1 = DartJs.new(f, { :out_file => of_path })
+      dfile1.compile
+      assert File.exists?(of_path)
+      dfile2 = DartJs.new(f)
+      dfile2.compile
+      assert File.exists?(dfile2.out_file)
+      dfile3 = DartJs.new("main() { print('Hello, Dart!'); }")
+      dfile3.compile
+      assert File.exists?(dfile3.out_file)
     end
   end
 end

@@ -1,19 +1,14 @@
-$:.push File.expand_path("../lib", __FILE__)
+$:.push File.expand_path('../lib', __FILE__)
 
-# Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "ruby-dart"
-  s.version     = "0.0.1"
-  s.authors     = ["Timo Uhlmann"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of RubyDart."
-  s.description = "TODO: Description of RubyDart."
+  s.name        = 'ruby-dart_js'
+  s.version     = '0.0.2'
+  s.authors     = ['Timo Uhlmann', 'Marcel Sackermann']
+  s.email       = %w(marcel@m0gg.org)
+  s.homepage    = 'https://github.com/m0gg/ruby-dart'
+  s.summary     = 'Provides dart2js transcoding for compatibility.'
+  s.description = ''
 
-  s.files = Dir["{lib}/**/*"] + ["MIT-LICENSE", "Rakefile"] #, "README.rdoc"]
-  s.test_files = Dir["test/**/*"]
-
-  # s.add_dependency "rails", "~> 3.2.6"
-
-  # s.add_development_dependency "sqlite3"
+  s.files = Dir['{lib}/**/*'] + %w(MIT-LICENSE Rakefile)
+  s.test_files = Dir['test/**/*']
 end
