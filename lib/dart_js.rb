@@ -1,9 +1,22 @@
+require 'tempfile'
 class DartJs
   class << self
     attr_writer :dart2js_binary
 
     def dart2js_binary
-      @dart2js_binary ||= ENV['DARTJS_SOURCE_PATH']
+      @dart2js_binary ||= (ENV['DARTJS_SOURCE_PATH'] || find_dart2js_in_path || find_dart2js_in_sdk)
+    end
+
+    private
+    def find_dart2js_in_path
+      system('dart2js -h') ? 'dart2js' : false
+      end
+
+    def find_dart2js_in_sdk
+      if root = ENV['DART_SDK_HOME']
+        file = File.join(root, 'bin', 'dart2js')
+        file if File.exist?(file)
+      end
     end
   end
 
@@ -12,7 +25,7 @@ class DartJs
 
   def initialize(file_or_data, options = {})
     @dart2js_binary = options[:dart2js_binary] || self.class.dart2js_binary
-    @out_file = options[:out_file] || File.join(Dir.tmpdir, "dart2js_#{self.object_id}_#{Time.now.usec}.js")
+    @out_file = options[:out_file] || File.join(Dir::tmpdir, "dart2js_#{self.object_id}_#{Time.now.usec}.js")
     if file_or_data.respond_to?(:path)
       throw 'File not found!' unless File.exists?(file_or_data)
       @input_file = file_or_data
