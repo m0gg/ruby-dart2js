@@ -1,5 +1,7 @@
 require 'tempfile'
-class DartJs
+require 'dart_js_exceptions'
+
+class DartJs < Sprockets::Processor
   class << self
     attr_writer :dart2js_binary
 
@@ -10,7 +12,7 @@ class DartJs
     private
     def find_dart2js_in_path
       system('dart2js -h') ? 'dart2js' : false
-      end
+    end
 
     def find_dart2js_in_sdk
       if root = ENV['DART_SDK_HOME']
@@ -21,30 +23,32 @@ class DartJs
   end
 
   attr_reader :data, :input_file, :result
-  attr_accessor :out_file, :dart2js_binary
+  attr_accessor :out_file, :out_dir, :dart2js_binary
 
   def initialize(file_or_data, options = {})
     @dart2js_binary = options[:dart2js_binary] || self.class.dart2js_binary
-    @out_file = options[:out_file] || File.join(Dir::tmpdir, "dart2js_#{self.object_id}_#{Time.now.usec}.js")
+    @out_dir = options[:out_dir] if options[:out_dir]
+    @out_file = options[:out_file] || File.join((@out_dir || Dir::tmpdir), "dart2js_#{self.object_id}_#{Time.now.usec}.js")
     if file_or_data.respond_to?(:path)
-      throw 'File not found!' unless File.exists?(file_or_data)
-      @input_file = file_or_data
+      if File.exists?(file_or_data)
+        @input_file = file_or_data
+      else
+        throw 'File not found!'
+      end
     else
       @data = file_or_data
     end
   end
 
   def compile
-    begin
-      cmd_args = [ @dart2js_binary ]
-      cmd_args << %Q{-o"#{out_file}"}
-      cmd_args << in_file = prepare_input.path
-      cmd = cmd_args.join(' ')
-      process = IO.popen(cmd)
-      @result = process.read
-    ensure
-      in_file.close! if in_file.respond_to?(:close!) && in_file != @input_file
-    end
+    cmd = [ @dart2js_binary,
+            %Q{-o"#{out_file}"},
+            in_file = prepare_input.path ].join(' ')
+    process = IO.popen(cmd, 'r')
+    @result = process.read
+    process.close
+    return_code = $?.to_i
+    return_code == 0 ? true : DartJsExceptions::DartJsCompilationException.new(cmd, in_file, @result)
   end
 
   def get_js_content
