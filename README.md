@@ -1,4 +1,4 @@
-# DartJs
+# Dart2Js
 
 ### Idea
 
