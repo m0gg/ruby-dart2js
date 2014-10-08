@@ -1,12 +1,12 @@
 require 'tempfile'
-require 'dart_js_exceptions'
+require 'dart2js_exceptions'
 
-class DartJs < Sprockets::Processor
+class Dart2js < Sprockets::Processor
   class << self
     attr_writer :dart2js_binary
 
     def dart2js_binary
-      @dart2js_binary ||= (ENV['DARTJS_SOURCE_PATH'] || find_dart2js_in_path || find_dart2js_in_sdk)
+      @dart2js_binary ||= (ENV['DART2JS_SOURCE_PATH'] || find_dart2js_in_path || find_dart2js_in_sdk)
     end
 
     private
@@ -48,7 +48,7 @@ class DartJs < Sprockets::Processor
     @result = process.read
     process.close
     return_code = $?.to_i
-    return_code == 0 ? true : DartJsExceptions::DartJsCompilationException.new(cmd, in_file, @result)
+    return_code == 0 ? true : Dart2JsExceptions::CompilationException.new(cmd, in_file, @result)
   end
 
   def get_js_content

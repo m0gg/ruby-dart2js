@@ -1,5 +1,5 @@
-module DartJsExceptions
-  class DartJsCompilationException < RuntimeError
+module Dart2JsExceptions
+  class CompilationException < RuntimeError
     attr_reader :cmd, :in_file, :result
 
     def initialize cmd, in_file, result
