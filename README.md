@@ -16,13 +16,13 @@ Provide automated transcoding from [Dart](https://www.dartlang.org/ 'dartlang.or
 
 `DartJs` will look for the `dart2js` binary in the following order:
 
-  1. `DARTJS_SOURCE_PATH`  direct path to binary `env DARTJS_SOURCE_PATH=/opt/dart-sdk/bin/dart2js`
+  1. `DART2JS_SOURCE_PATH`  direct path to binary `env DARTJS_SOURCE_PATH=/opt/dart-sdk/bin/dart2js`
   2. `DART_SDK_HOME`  path to sdk `env DART_SDK_HOME=/opt/dart-sdk`
   3. `PATH`  looks for dart2js in your PATH-variable
 
 ### Usage
 
-    transcoder = DartJs.new(file, options)
+    transcoder = Dart2Js.new(file, options)
     transcoder.compile
     transcoder.get_js_content
     transcoder.out_file
