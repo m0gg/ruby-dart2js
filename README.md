@@ -10,7 +10,7 @@ Provide automated transcoding from [Dart](https://www.dartlang.org/ 'dartlang.or
 
 `Gemfile`
 
-    gem 'ruby-dart_js', :git => https://github.com/m0gg/ruby-dart_js.git
+    gem 'ruby-dart2js', :git => https://github.com/m0gg/ruby-dart2js.git
 
 ###### Find SDK
 
