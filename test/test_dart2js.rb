@@ -1,4 +1,4 @@
-require 'dart_js'
+require 'dart2js'
 require 'test/unit'
 require 'tempfile'
 
