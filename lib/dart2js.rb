@@ -40,8 +40,9 @@ class Dart2Js < Sprockets::Processor
     end
   end
 
-  def compile
+  def compile minify=true
     cmd = [ @dart2js_binary,
+            minify ? ' -m ' || '',
             %Q{-o"#{out_file}"},
             in_file = prepare_input.path ].join(' ')
     process = IO.popen(cmd, 'r')
