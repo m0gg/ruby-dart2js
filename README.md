@@ -22,13 +22,15 @@ Provide automated transcoding from [Dart](https://www.dartlang.org/ 'dartlang.or
 
 ### Usage
 
-    transcoder = Dart2Js.new(file, options)
-    transcoder.compile
-    transcoder.get_js_content
-    transcoder.out_file
+    dart_compiler = Dart2Js.new(file, options)
+    dart_compiler.compile
+    dart_compiler.get_js_content
+    dart_compiler.out_file
 
 Initialization takes either dart-sourcecode directly or an instance of `File` as first argument and
 an options-hash as second argument. `:dart2js_binary` and `:out_file` may be provided with the options-hash.
 
-`transcoder.compile` actually runs the `dart2js` command, the output of the run will be saved in `@result` and
-the final js stays in `@out_file` and may be read with `transcoder.get_js_content`.
+`dart_compiler.compile` actually runs the `dart2js` command, the output of the run will be saved in `@result` and
+the final js stays in `@out_file` and may be read with `dart_compiler.get_js_content`.
+
+With version 0.2.0 `Dart2Js::compile` now accepts a boolean argument for minifying, it's optional and `true` by default.
