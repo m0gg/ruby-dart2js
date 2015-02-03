@@ -1,4 +1,4 @@
-# Dart2Js [![ruby-dart2js API Documentation](https://www.omniref.com/ruby/gems/ruby-dart2js.png)](https://www.omniref.com/ruby/gems/ruby-dart2js) #
+# Dart2Js [![ruby-dart2js API Documentation](https://www.omniref.com/ruby/gems/ruby-dart2js.png)](https://www.omniref.com/ruby/gems/ruby-dart2js) [![Gem Version](https://badge.fury.io/rb/ruby-dart2js.svg)](http://badge.fury.io/rb/ruby-dart2js) #
 
 ### Idea ###
 
