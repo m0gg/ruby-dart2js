@@ -1,18 +1,18 @@
-# Dart2Js
+# Dart2Js [![ruby-dart2js API Documentation](https://www.omniref.com/ruby/gems/ruby-dart2js.png)](https://www.omniref.com/ruby/gems/ruby-dart2js) #
 
-### Idea
+### Idea ###
 
 Provide automated transcoding from [Dart](https://www.dartlang.org/ 'dartlang.org') to Javascript.
 
-### Setup
+### Setup ###
 
-###### Add gem
+###### Add gem ######
 
 `Gemfile`
 
     gem 'ruby-dart2js', :git => https://github.com/m0gg/ruby-dart2js.git
 
-###### Find SDK
+###### Find SDK ######
 
 `DartJs` will look for the `dart2js` binary in the following order:
 
@@ -20,7 +20,7 @@ Provide automated transcoding from [Dart](https://www.dartlang.org/ 'dartlang.or
   2. `DART_SDK_HOME`  path to sdk `env DART_SDK_HOME=/opt/dart-sdk`
   3. `PATH`  looks for dart2js in your PATH-variable
 
-### Usage
+### Usage ###
 
     dart_compiler = Dart2Js.new(file, options)
     dart_compiler.compile
