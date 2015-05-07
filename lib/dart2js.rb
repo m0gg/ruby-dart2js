@@ -1,7 +1,7 @@
 require 'tempfile'
 require 'dart2js_exceptions'
 
-class Dart2Js < Sprockets::Processor
+class Dart2Js
   class << self
     attr_writer :dart2js_binary
 
