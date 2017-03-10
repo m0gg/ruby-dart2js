@@ -1,8 +1,19 @@
+require 'tilt'
 require 'tempfile'
 require 'dart2js_exceptions'
 
 class Dart2Js
   include Dart2JsExceptions
+
+  class Template < Tilt::Template
+    def prepare
+      @compiler = Dart2Js.new data
+    end
+
+    def precompiled_template locals
+      return @compiler.result
+    end
+  end
 
   class << self
     attr_writer :dart2js_binary
