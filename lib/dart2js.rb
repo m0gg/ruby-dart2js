@@ -6,12 +6,14 @@ class Dart2Js
   include Dart2JsExceptions
 
   class Template < Tilt::Template
+    self.metadata[:mime_type] = 'application/javascript'
+
     def prepare
-      @compiler = Dart2Js.new data
+      @compiler = Dart2Js.new data, pwd: File.dirname(file)
     end
 
-    def precompiled_template locals
-      return @compiler.result
+    def evaluate(scope, locals, &block)
+      return @compiler.compile
     end
   end
 
