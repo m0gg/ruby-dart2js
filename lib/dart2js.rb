@@ -13,7 +13,9 @@ class Dart2Js
     end
 
     def evaluate(scope, locals, &block)
-      return @compiler.compile
+      data = @compiler.compile
+      @compiler.close
+      return data
     end
   end
 
